@@ -1,6 +1,19 @@
+@DotNet8-API-Entity_HostAddress = https://localhost:7280
 @DotNet8_API_Entity_HostAddress = http://localhost:5281
 
 GET {{DotNet8_API_Entity_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{DotNet8-API-Entity_HostAddress}}/weatherforecast
+
+###
+
+GET {{DotNet8-API-Entity_HostAddress}}/api/peterhero
+
+###
+
+GET {{DotNet8-API-Entity_HostAddress}}/api/peterhero
 
 ###
