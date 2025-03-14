@@ -50,5 +50,38 @@ namespace DotNet8_API_Entity.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.PeterHeroes.ToListAsync());
         }
+
+        // edit and update the new hero
+        [HttpPut]
+        public async Task<ActionResult<List<PeterHero>>> UpdateHero(PeterHero updateHero)
+        {
+            var dbHero = await _context.PeterHeroes.FindAsync(updateHero.Id);
+            if (dbHero is null)
+            {
+                return NotFound("Hero not found");
+            }
+            dbHero.Name = updateHero.Name;
+            dbHero.FirstName = updateHero.FirstName;
+            dbHero.LastName = updateHero.LastName;
+            dbHero.Place = updateHero.Place;
+
+            await _context.SaveChangesAsync(); 
+            return Ok(await _context.PeterHeroes.ToListAsync());
+        }
+
+        // delete the new hero
+        [HttpDelete]
+        public async Task<ActionResult<List<PeterHero>>> DeleteHero(int id)
+        {
+            var dbHero = await _context.PeterHeroes.FindAsync(id);
+            if (dbHero is null)
+            {
+                return NotFound("Hero not found");
+            }
+
+            _context.PeterHeroes.Remove(dbHero);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.PeterHeroes.ToListAsync());
+        }
     }
 }
