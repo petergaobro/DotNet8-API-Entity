@@ -20,6 +20,7 @@ namespace DotNet8_API_Entity.Controllers
             _context = context;
         }
 
+        // get all heroes
         [HttpGet]
         public async Task<ActionResult<List<PeterHero>>> GetAllHeroes()
         {
@@ -27,9 +28,10 @@ namespace DotNet8_API_Entity.Controllers
             return Ok(heroes);
         }        
         
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult<List<PeterHero>>> GetHero(int id)
+        // get hero with id
+        //[HttpGet]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PeterHero>> GetHero(int id)
         {
             var hero = await _context.PeterHeroes.FindAsync(id);
             if(hero is null)
@@ -37,6 +39,16 @@ namespace DotNet8_API_Entity.Controllers
                 return NotFound("Hero not found");
             }
             return Ok(hero);
+        }
+
+        // add the new hero
+        [HttpPost]
+        public async Task<ActionResult<List<PeterHero>>> AddHero(PeterHero hero)
+        {
+
+            _context.PeterHeroes.Add(hero);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.PeterHeroes.ToListAsync());
         }
     }
 }
