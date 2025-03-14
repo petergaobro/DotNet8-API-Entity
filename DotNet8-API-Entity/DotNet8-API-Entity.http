@@ -13,7 +13,3 @@ GET {{DotNet8-API-Entity_HostAddress}}/weatherforecast
 GET {{DotNet8-API-Entity_HostAddress}}/api/peterhero
 
 ###
-
-GET {{DotNet8-API-Entity_HostAddress}}/api/peterhero
-
-###
