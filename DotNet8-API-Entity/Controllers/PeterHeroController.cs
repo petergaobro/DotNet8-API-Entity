@@ -25,6 +25,18 @@ namespace DotNet8_API_Entity.Controllers
         {
             var heroes = await _context.PeterHeroes.ToListAsync();
             return Ok(heroes);
+        }        
+        
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<List<PeterHero>>> GetHero(int id)
+        {
+            var hero = await _context.PeterHeroes.FindAsync(id);
+            if(hero is null)
+            {
+                return NotFound("Hero not found");
+            }
+            return Ok(hero);
         }
     }
 }
